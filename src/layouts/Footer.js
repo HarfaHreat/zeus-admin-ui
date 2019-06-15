@@ -8,27 +8,27 @@ const FooterView = () => (
     <GlobalFooter
       links={[
         {
-          key: 'Pro 首页',
-          title: 'Pro 首页',
-          href: 'https://pro.ant.design',
+          key: 'ZEUS 权限管理后台',
+          title: 'ZEUS 权限管理后台',
+          href: 'http://admin.bullteam.cn/login',
           blankTarget: true,
         },
         {
           key: 'github',
           title: <Icon type="github" />,
-          href: 'https://github.com/ant-design/ant-design-pro',
+          href: 'https://github.com/bullteam/zeus-admin-ui',
           blankTarget: true,
         },
-        {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
-          blankTarget: true,
-        },
+        // {
+        //   key: 'Ant Design',
+        //   title: 'Ant Design',
+        //   href: 'https://ant.design',
+        //   blankTarget: true,
+        // },
       ]}
       copyright={
         <Fragment>
-          Copyright <Icon type="copyright" /> 2019 蚂蚁金服体验技术部出品
+          Copyright <Icon type="copyright" /> 2019 公牛开源联盟
         </Fragment>
       }
     />

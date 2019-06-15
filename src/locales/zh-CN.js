@@ -12,6 +12,8 @@ import pwa from './zh-CN/pwa';
 import component from './zh-CN/component';
 import editor from './zh-CN/editor';
 
+import auth from './zh-CN/auth';
+
 export default {
   'navBar.lang': '语言',
   'layout.user.link.help': '帮助',
@@ -34,4 +36,6 @@ export default {
   ...pwa,
   ...component,
   ...editor,
+
+  ...auth,
 };

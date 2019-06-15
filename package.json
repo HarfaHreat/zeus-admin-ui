@@ -1,8 +1,9 @@
 {
-  "name": "ant-design-pro",
-  "version": "2.3.1",
+  "name": "zeus-admin-ui",
+  "ant-design-pro-version": "2.3.1",
+  "version": "0.0.1",
   "private": true,
-  "description": "An out-of-box UI solution for enterprise applications",
+  "description": "An admin UI  library based on Ant-design-pro and React-based implementation.",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
