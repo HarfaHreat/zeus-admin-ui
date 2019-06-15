@@ -36,7 +36,7 @@ export default {
             redirect = null;
           }
         }
-        yield put(routerRedux.replace(redirect || '/auth/hello'));
+        yield put(routerRedux.replace(redirect || '/'));
       }
     },
 
