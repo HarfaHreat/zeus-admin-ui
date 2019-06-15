@@ -1,6 +1,6 @@
 [English](./README.md) | 简体中文 
 
-<h1 align="center">宙斯权限管理后台用户界面</h1>
+<h1 align="center">宙斯权限管理后台</h1>
 
 <div align="center">
 
