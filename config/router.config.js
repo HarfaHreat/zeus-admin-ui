@@ -23,6 +23,21 @@ export default [
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
+      //auth
+      {
+        path: '/auth',
+        name: 'auth',
+        icon: 'dashboard',
+        routes: [
+          {
+            path: '/auth/hello',
+            name: 'hello',
+            component: './Auth/Hello',
+          },
+        ],
+      },
+
+      /*
       // dashboard
       { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
       {
@@ -180,6 +195,9 @@ export default [
           { path: '/result/fail', name: 'fail', component: './Result/Error' },
         ],
       },
+
+      */
+
       {
         name: 'exception',
         icon: 'warning',
@@ -265,32 +283,6 @@ export default [
             ],
           },
         ],
-      },
-      //  editor
-      {
-        name: 'editor',
-        icon: 'highlight',
-        path: '/editor',
-        routes: [
-          {
-            path: '/editor/flow',
-            name: 'flow',
-            component: './Editor/GGEditor/Flow',
-          },
-          {
-            path: '/editor/mind',
-            name: 'mind',
-            component: './Editor/GGEditor/Mind',
-          },
-          {
-            path: '/editor/koni',
-            name: 'koni',
-            component: './Editor/GGEditor/Koni',
-          },
-        ],
-      },
-      {
-        component: '404',
       },
     ],
   },

@@ -12,6 +12,8 @@ import pwa from './en-US/pwa';
 import component from './en-US/component';
 import editor from './en-US/editor';
 
+import auth from './en-US/auth';
+
 export default {
   'navBar.lang': 'Languages',
   'layout.user.link.help': 'Help',
@@ -34,4 +36,6 @@ export default {
   ...pwa,
   ...component,
   ...editor,
+
+  ...auth,
 };
