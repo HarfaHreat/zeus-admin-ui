@@ -4,9 +4,20 @@ export default [
     path: '/user',
     component: '../layouts/UserLayout',
     routes: [
-      { path: '/user', redirect: '/user/login' },
-      { path: '/user/login', name: 'login', component: './User/Login' },
-      { path: '/user/register', name: 'register', component: './User/Register' },
+      {
+        path: '/user',
+        redirect: '/user/login',
+      },
+      {
+        path: '/user/login',
+        name: 'login',
+        component: './User/Login',
+      },
+      {
+        path: '/user/register',
+        name: 'register',
+        component: './User/Register',
+      },
       {
         path: '/user/register-result',
         name: 'register.result',
@@ -23,6 +34,21 @@ export default [
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
+      //auth
+      {
+        path: '/auth',
+        name: 'auth',
+        icon: 'dashboard',
+        routes: [
+          {
+            path: '/auth/hello',
+            name: 'hello',
+            component: './Auth/Hello',
+          },
+        ],
+      },
+      { path: '/', redirect: '/auth/hello', authority: ['admin', 'user'] },
+      /*
       // dashboard
       { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
       {
@@ -180,6 +206,9 @@ export default [
           { path: '/result/fail', name: 'fail', component: './Result/Error' },
         ],
       },
+
+      */
+
       {
         name: 'exception',
         icon: 'warning',
@@ -265,32 +294,6 @@ export default [
             ],
           },
         ],
-      },
-      //  editor
-      {
-        name: 'editor',
-        icon: 'highlight',
-        path: '/editor',
-        routes: [
-          {
-            path: '/editor/flow',
-            name: 'flow',
-            component: './Editor/GGEditor/Flow',
-          },
-          {
-            path: '/editor/mind',
-            name: 'mind',
-            component: './Editor/GGEditor/Mind',
-          },
-          {
-            path: '/editor/koni',
-            name: 'koni',
-            component: './Editor/GGEditor/Koni',
-          },
-        ],
-      },
-      {
-        component: '404',
       },
     ],
   },
