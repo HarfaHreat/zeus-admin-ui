@@ -7,9 +7,9 @@ import styles from './Test.css';
   testList
 }))
 class Test extends Component {
-  constructor(props){
-    super(props);
-  }
+  // constructor(props){
+  //   super(props);
+  // }
 
   handleDelete = (id) => {
     this.props.dispatch({
@@ -19,11 +19,12 @@ class Test extends Component {
   }
 
   render() {
+    const {testList} = this.props;
     return (
-        <div>
-          <h2>部门管理</h2>
-          <List onDelete={(e) => this.handleDelete(e)} data={this.props.testList}/>
-        </div>
+      <div className={styles.main}>
+        <h2>部门管理</h2>
+        <List onDelete={(e) => this.handleDelete(e)} data={testList} />
+      </div>
     );
   }
 }
