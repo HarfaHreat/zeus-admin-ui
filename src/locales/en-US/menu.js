@@ -45,4 +45,6 @@ export default {
 
   'menu.auth': 'Auth manage page',
   'menu.auth.hello': 'Hello',
+  'menu.department': 'Department manage',
+  'menu.department.test': 'test',
 };

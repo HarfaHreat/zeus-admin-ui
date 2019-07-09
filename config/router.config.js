@@ -34,6 +34,8 @@ export default [
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
+      //default
+      { path: '/', redirect: '/auth/hello', authority: ['admin', 'user'] },
       //auth
       {
         path: '/auth',
@@ -47,7 +49,19 @@ export default [
           },
         ],
       },
-      { path: '/', redirect: '/auth/hello', authority: ['admin', 'user'] },
+      //department
+      {
+        path: '/department',
+        name: 'department',
+        icon: 'dashboard',
+        routes: [
+          {
+            path: '/department/test',
+            name: 'test',
+            component: './Department/Test',
+          },
+        ],
+      },
       /*
       // dashboard
       { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },

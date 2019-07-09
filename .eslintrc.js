@@ -24,7 +24,7 @@ module.exports = {
       2,
       {
         optionalDependencies: true,
-        devDependencies: ['**/tests/**.js', '/mock/**/**.js', '**/**.test.js'],
+        devDependencies: ['**/tests/**.js', '/mock/**/**.js', 'test.js'],
       },
     ],
     'import/no-cycle': 0,
