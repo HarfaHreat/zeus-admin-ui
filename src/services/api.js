@@ -104,7 +104,7 @@ export async function updateFakeList(params) {
 }
 
 export async function fakeAccountLogin(params) {
-  return request('/api/login/account', {
+  return request('http://api-admin.bullteam.cn/v1/api/users/login', {
     method: 'POST',
     data: params,
   });

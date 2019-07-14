@@ -79,10 +79,10 @@ export default {
     'primary-color': primaryColor,
   },
   // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
+  //   '/api': {
+  //     target: 'http://api-admin.bullteam.cn',
   //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
+  //     // pathRewrite: { '^/api': '' },
   //   },
   // },
   ignoreMomentLocale: true,
