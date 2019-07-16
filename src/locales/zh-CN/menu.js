@@ -45,6 +45,5 @@ export default {
 
   'menu.auth': '权限管理',
   'menu.auth.hello': '欢迎页',
-  'menu.department': '部门管理',
-  'menu.department.test': '测试',
+  'menu.auth.department': '部门管理',
 };

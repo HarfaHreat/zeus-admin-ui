@@ -47,19 +47,11 @@ export default [
             name: 'hello',
             component: './Auth/Hello',
           },
-        ],
-      },
-      //department
-      {
-        path: '/department',
-        name: 'department',
-        icon: 'dashboard',
-        routes: [
           {
-            path: '/department/test',
-            name: 'test',
-            component: './Department/Test',
-          },
+            path: '/auth/department',
+            name: 'department',
+            component: './Auth/Department',
+          }
         ],
       },
       /*
