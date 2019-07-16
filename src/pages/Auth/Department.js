@@ -152,9 +152,7 @@ class Department extends Component {
       <div className={styles.main}>
         {/* 编辑框 */}
         <Modal title="新建" visible={this.state.show_modal_edit} onOk={this.modalSave} onCancel={this.modalCancel}>
-          <WrappedEditForm onRef={(ref) => {
-            this._editForm = ref
-          }} hideModalEdit={this.hideModalEdit} />
+          <WrappedEditForm onRef={(ref) => {this._editForm = ref}} hideModalEdit={this.hideModalEdit} />
         </Modal>
 
         <h2>部门管理</h2>
