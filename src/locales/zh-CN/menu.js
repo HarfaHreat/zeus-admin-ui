@@ -46,4 +46,7 @@ export default {
   'menu.auth': '权限管理',
   'menu.auth.hello': '欢迎页',
   'menu.auth.department': '部门管理',
+
+  'menu.system': '系统设置',
+  'menu.system.domain': '项目管理',
 };

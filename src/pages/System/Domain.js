@@ -2,23 +2,38 @@ import React, {Component} from 'react';
 // import {connect} from 'dva'; //网络请求组件
 // import List from '@/components/List';
 import {Button, Table, Modal, Form, Input, Popconfirm} from 'antd';
-import styles from './Department.less';
+import styles from './Domain.less';
 
 
 /* 数据 */
 const data = [
   {
     id: '1',
-    name: 'XX部',
+    name: 'XX项目',
+    remark: 'XXXXXX',//备注
+    mark: 'test',//标识
+    update_time: '2019-01-01 11:11:11',
+    url: 'https://www.baidu.com',//链接
   },
   {
     id: '2',
-    name: 'YYY部',
+    name: 'YYY项目',
+    remark: 'YYYYYYY',
+    mark: 'test2',
+    update_time: '2019-01-01 22:22:22',
+    url: '',
   },
 ];
 
 /* 编辑框组件 */
 class EditForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      edit_type: 1,// 编辑类型：1新建，2编辑
+    }
+  }
+
   /* 组件挂载后 */
   componentDidMount() {
     this.props.onRef(this);
@@ -59,6 +74,20 @@ class EditForm extends Component {
             rules: [{required: true, message: '请输入名称'}],
           })(<Input />)}
         </Form.Item>
+        <Form.Item label="标识">
+          {getFieldDecorator('mark', {
+            rules: [{required: true, message: '请输入标识'}],
+          })(<Input
+            disabled={this.state.edit_type == 2}
+            placeholder="此标识值一旦添加不允许修改"
+          />)}
+        </Form.Item>
+        <Form.Item label="备注">
+          {getFieldDecorator('remark')(<Input />)}
+        </Form.Item>
+        <Form.Item label="链接">
+          {getFieldDecorator('url')(<Input />)}
+        </Form.Item>
       </Form>
     );
   }
@@ -67,7 +96,7 @@ class EditForm extends Component {
 const WrappedEditForm = Form.create({name: 'edit_form'})(EditForm);
 
 /* 部门管理模块 */
-class Department extends Component {
+class Domain extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,21 +110,35 @@ class Department extends Component {
    */
   showModalEdit = (record) => {
     this.setState({
-      show_modal_edit: true
+      show_modal_edit: true,
     });
 
     setTimeout(() => {
       if (this.editForm) {
         this.editForm.props.form.resetFields();
+        this.editForm.state.edit_type = 1;
         this.setState({
           modal_title: '新建',
         });
         if (record) {
+          this.editForm.state.edit_type = 2;
+          const {
+            id,
+            name,
+            remark,
+            mark,
+            url
+          } = {...record};
+          this.editForm.props.form.setFieldsValue({
+            id,
+            name,
+            remark,
+            mark,
+            url
+          });
           this.setState({
             modal_title: '编辑',
           });
-          const {name} = {...record};
-          this.editForm.props.form.setFieldsValue({name});
         }
       }
     }, 0);
@@ -138,8 +181,8 @@ class Department extends Component {
     const columns = [
       {
         title: 'ID',
-        dataIndex: 'id',
         width: '50px',
+        dataIndex: 'id',
         key: 'id',
       },
       {
@@ -148,11 +191,21 @@ class Department extends Component {
         key: 'name',
       },
       {
+        title: '备注',
+        dataIndex: 'remark',
+        key: 'remark',
+      },
+      {
+        title: '修改时间',
+        width: '200px',
+        dataIndex: 'update_time',
+        key: 'update_time',
+      },
+      {
         title: '操作',
         width: '300px',
         render: (text, record, index) => (
           <div className={styles['btn-group']}>
-            <Button type="primary">查看用户</Button>
             <Button type="primary" onClick={() => this.showModalEdit(record)}>编辑</Button>
             <Popconfirm
               placement="top"
@@ -184,7 +237,7 @@ class Department extends Component {
           />
         </Modal>
 
-        <h2>部门管理</h2>
+        <h2>项目管理</h2>
         <Button
           type="primary"
           icon="edit"
@@ -200,4 +253,4 @@ class Department extends Component {
   }
 }
 
-export default Department;
+export default Domain;

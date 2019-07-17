@@ -54,6 +54,19 @@ export default [
           }
         ],
       },
+      //system
+      {
+        path: '/system',
+        name: 'system',
+        icon: 'dashboard',
+        routes: [
+          {
+            path: '/system/domain',
+            name: 'domain',
+            component: './System/Domain',
+          }
+        ],
+      },
       /*
       // dashboard
       { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
