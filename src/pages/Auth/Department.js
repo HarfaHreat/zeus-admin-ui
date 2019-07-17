@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import {connect} from 'dva'; //网络请求组件
 // import List from '@/components/List';
-import {Button, Table, Modal, Form, Input} from 'antd';
+import {Button, Table, Modal, Form, Input, Popconfirm} from 'antd';
 import styles from './Department.less';
 
 
@@ -43,12 +43,10 @@ class EditForm extends Component {
     const {getFieldDecorator} = this.props.form;
     const editFormLayout = {
       labelCol: {
-        xs: {span: 16},
-        sm: {span: 8},
+        span: 4
       },
       wrapperCol: {
-        xs: {span: 24},
-        sm: {span: 16},
+        span: 16
       },
     };
     return (
@@ -123,6 +121,14 @@ class Department extends Component {
     });
   }
 
+  /**
+   * 删除
+   */
+  delConfirm = (item) => {
+    console.log(item);
+    // TODO 删除
+  }
+
   render() {
     const columns = [
       {
@@ -143,7 +149,9 @@ class Department extends Component {
           <div className={styles['btn-group']}>
             <Button type="primary">查看用户</Button>
             <Button type="primary" onClick={() => this.showModalEdit(record)}>编辑</Button>
-            <Button type="danger">删除</Button>
+            <Popconfirm placement="top" title="确定要删除？" onConfirm={()=>this.delConfirm(record)} okText="是" cancelText="否">
+              <Button type="danger">删除</Button>
+            </Popconfirm>
           </div>
         ),
       },
@@ -152,7 +160,9 @@ class Department extends Component {
       <div className={styles.main}>
         {/* 编辑框 */}
         <Modal title="新建" visible={this.state.show_modal_edit} onOk={this.modalSave} onCancel={this.modalCancel}>
-          <WrappedEditForm onRef={(ref) => {this._editForm = ref}} hideModalEdit={this.hideModalEdit} />
+          <WrappedEditForm onRef={(ref) => {
+            this._editForm = ref
+          }} hideModalEdit={this.hideModalEdit} />
         </Modal>
 
         <h2>部门管理</h2>
