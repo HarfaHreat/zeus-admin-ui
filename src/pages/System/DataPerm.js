@@ -1,8 +1,20 @@
 import React, {Component} from 'react';
 // import {connect} from 'dva'; //网络请求组件
 // import List from '@/components/List';
-import {Button, Table, Modal, Form, Input, Popconfirm} from 'antd';
-import styles from './Domain.less';
+import {
+  Button,
+  Table,
+  Modal,
+  Form,
+  Input,
+  Popconfirm,
+  Select,
+  Radio,
+} from 'antd';
+import styles from './DataPerm.less';
+
+const {Option} = Select;
+const {TextArea} = Input;
 
 
 /* 数据 */
@@ -10,18 +22,20 @@ const data = [
   {
     id: '1',
     name: 'XX项目',
-    remark: 'XXXXXX',//备注
-    mark: 'test',//标识
-    update_time: '2019-01-01 11:11:11',
-    url: 'https://www.baidu.com',//链接
+    type: 1,
+    order: 1,
+    url: '',
+    rule: '',
+    statement: 'sssssss1111111'
   },
   {
     id: '2',
-    name: 'YYY项目',
-    remark: 'YYYYYYY',
-    mark: 'test2',
-    update_time: '2019-01-01 22:22:22',
-    url: '',
+    name: 'YYYYYYYYYYY项目',
+    type: 2,
+    order: 2,
+    url: '/index2',
+    rule: 'YYYYYYYY222222',
+    statement: 'sssssss22222'
   },
 ];
 
@@ -54,8 +68,9 @@ class EditForm extends Component {
     });
   }
 
+
   render() {
-    const {getFieldDecorator} = this.props.form;
+    const {getFieldDecorator, getFieldValue} = this.props.form;
     const editFormLayout = {
       labelCol: {
         span: 4
@@ -69,24 +84,43 @@ class EditForm extends Component {
         <Form.Item label="ID" style={{display: 'none'}}>
           {getFieldDecorator('id', {})(<Input disabled />)}
         </Form.Item>
+        <Form.Item label="类型">
+          {getFieldDecorator('type', {
+            initialValue: 1,
+            rules: [{required: true, message: '请选择类型'}],
+          })(
+            <Radio.Group buttonStyle="solid">
+              <Radio.Button value={1}>分类</Radio.Button>
+              <Radio.Button value={2}>数据权限</Radio.Button>
+            </Radio.Group>
+          )}
+        </Form.Item>
         <Form.Item label="名称">
           {getFieldDecorator('name', {
             rules: [{required: true, message: '请输入名称'}],
           })(<Input />)}
         </Form.Item>
-        <Form.Item label="标识">
-          {getFieldDecorator('mark', {
-            rules: [{required: true, message: '请输入标识'}],
-          })(<Input
-            disabled={this.state.edit_type == 2}
-            placeholder="此标识值一旦添加不允许修改"
-          />)}
+        <Form.Item label="排序">
+          {getFieldDecorator('order', {
+            rules: [{required: true, message: '请输入序号'}],
+          })(<Input />)}
         </Form.Item>
-        <Form.Item label="备注">
-          {getFieldDecorator('remark')(<Input />)}
+        <Form.Item
+          label="路由"
+          style={{display: (getFieldValue('type') === 2) ? 'block' : 'none'}}
+        >
+          {getFieldDecorator('url', {
+            rules: [{required: getFieldValue('type') === 2, message: '请输入路由'}],
+          })(<Input />)}
         </Form.Item>
-        <Form.Item label="链接">
-          {getFieldDecorator('url')(<Input />)}
+        <Form.Item
+          label="权限规则"
+          style={{display: (getFieldValue('type') === 2) ? 'block' : 'none'}}
+        >
+          {getFieldDecorator('rule')(<TextArea rows={2} />)}
+        </Form.Item>
+        <Form.Item label="说明">
+          {getFieldDecorator('statement')(<TextArea rows={4} />)}
         </Form.Item>
       </Form>
     );
@@ -95,8 +129,8 @@ class EditForm extends Component {
 
 const WrappedEditForm = Form.create({name: 'edit_form'})(EditForm);
 
-/* 项目管理模块 */
-class Domain extends Component {
+/* 数据权限管理模块 */
+class DataPerm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -125,16 +159,18 @@ class Domain extends Component {
           const {
             id,
             name,
-            remark,
-            mark,
-            url
+            type,
+            order,
+            url,
+            statement,
           } = {...record};
           this.editForm.props.form.setFieldsValue({
             id,
             name,
-            remark,
-            mark,
-            url
+            type,
+            order,
+            url,
+            statement,
           });
           this.setState({
             modal_title: '编辑',
@@ -177,29 +213,42 @@ class Domain extends Component {
     // TODO 删除
   }
 
+
+  topSelectChange = () => {
+
+  }
+
   render() {
     const columns = [
-      {
-        title: 'ID',
-        width: '50px',
-        dataIndex: 'id',
-        key: 'id',
-      },
       {
         title: '名称',
         dataIndex: 'name',
         key: 'name',
       },
       {
-        title: '备注',
-        dataIndex: 'remark',
-        key: 'remark',
+        title: '类型',
+        dataIndex: 'type',
+        key: 'type',
       },
       {
-        title: '修改时间',
-        width: '200px',
-        dataIndex: 'update_time',
-        key: 'update_time',
+        title: '排序',
+        dataIndex: 'order',
+        key: 'order',
+      },
+      {
+        title: '路由',
+        dataIndex: 'url',
+        key: 'url',
+      },
+      {
+        title: '权限规则',
+        dataIndex: 'rule',
+        key: 'rule',
+      },
+      {
+        title: '说明',
+        dataIndex: 'statement',
+        key: 'statement',
       },
       {
         title: '操作',
@@ -220,6 +269,8 @@ class Domain extends Component {
         ),
       },
     ];
+
+    const topOptions = {1: '权限中心'};
     return (
       <div className={styles.main}>
         {/* 编辑框 */}
@@ -237,20 +288,44 @@ class Domain extends Component {
           />
         </Modal>
 
-        <h2>项目管理</h2>
-        <Button
-          type="primary"
-          icon="edit"
-          style={{marginBottom: 16}}
-          onClick={() => {
-            this.showModalEdit()
+        <h2>数据权限</h2>
+
+        <Select
+          defaultValue={topOptions[Object.keys(topOptions)[0]]}
+          style={{width: 150, marginRight: 10,}}
+          onChange={() => {
+            this.topSelectChange()
           }}
         >
-          添加
-        </Button>
+          {
+            Object.keys(topOptions).map((key) => {
+              let val = topOptions[key];
+              return (<Option value={key}>{val}</Option>);
+            })
+          }
+        </Select>
+        <span className={styles['btn-group']}>
+          <Button
+            type="primary"
+            icon="search"
+            style={{marginBottom: 16}}
+          >
+            搜索
+          </Button>
+          <Button
+            type="primary"
+            icon="edit"
+            style={{marginBottom: 16}}
+            onClick={() => {
+              this.showModalEdit()
+            }}
+          >
+            添加
+          </Button>
+        </span>
         <Table dataSource={data} columns={columns} />
       </div>);
   }
 }
 
-export default Domain;
+export default DataPerm;

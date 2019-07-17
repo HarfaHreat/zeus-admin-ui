@@ -64,6 +64,11 @@ export default [
             path: '/system/domain',
             name: 'domain',
             component: './System/Domain',
+          },
+          {
+            path: '/system/dataPerm',
+            name: 'dataPerm',
+            component: './System/DataPerm',
           }
         ],
       },
